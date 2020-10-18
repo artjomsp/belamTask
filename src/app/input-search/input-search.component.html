@@ -1,0 +1,25 @@
+<h1 class="mat-display-2 title" [ngStyle.xs]="{'font-size.px': 22}" [ngStyle.sm]="{'font-size.px': 40}">Search Movies with OMDb API</h1>
+
+<form class="example-form">
+  <mat-form-field appearance="outline" class="searchMoviesInput">
+    <input matInput placeholder="Search movies..." [formControl]="inputFormControl" (keyup.enter)="searchMovies()">
+    <mat-error>
+      {{getErrorMessage()}}
+    </mat-error>
+    <mat-icon (click)="searchMovies()" matSuffix> search </mat-icon>
+  </mat-form-field>
+</form>
+
+<div class="moviesContainer" fxLayout="row wrap" fxLayoutGap="15px">
+<mat-card class="mat-elevation-z4" *ngFor="let movie of allMoviesArr">
+  <mat-card-header>
+    <mat-card-title>{{movie.Title}} ({{movie.Year}})</mat-card-title>
+  </mat-card-header>
+  <div class="posterContainer">
+    <img mat-card-image alt="{{movie.Title}}" src="{{movie.Poster}}">
+  </div>
+  <mat-card-actions>
+    <button mat-flat-button color="primary" [routerLink]="['movie', movie.imdbID]">Movie Details</button>
+  </mat-card-actions>
+</mat-card>
+</div>
